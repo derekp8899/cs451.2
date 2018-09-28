@@ -1,0 +1,50 @@
+/*
+Derek Popowski
+
+derek.a.popowski@und.edu
+
+CSCI 451 Operating systems I
+
+hw5
+
+
+
+*/
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+
+void* garbage(void *ptr);
+void* process(void *ptr);
+pthread_mutex_t m1,m2,m3;
+int pages[5000][3];
+
+int main(int argc, char* argv[]){
+  pthread_t p1,p2,p3,p4;
+  int id[3] = {100,200,300};
+  int i;
+  //  for(i = 0;i<3;i++)
+    // process((void*)&id[i]);
+  pthread_create(&p1,NULL,process,(void*)&id[0]);
+  pthread_create(&p2,NULL,process,(void*)&id[1]);
+  pthread_create(&p3,NULL,process,(void*)&id[2]);
+  pthread_join(p1,NULL);
+  pthread_join(p2,NULL);
+  pthread_join(p3,NULL);
+  return 0;
+}
+void* garbage(void* ptr){
+  while(1){
+
+  }
+}
+void* process(void* ptr){
+  int pid = *(int*)ptr;
+  printf("%d\n",pid);
+  while(1){
+    break;
+  }
+  return NULL;
+}
